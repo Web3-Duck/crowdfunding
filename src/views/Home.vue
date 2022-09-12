@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h2>请切换到Kovan网络体验</h2>
     <div class="top">
       <div>我的余额:{{ formatAmount(balance) }} ETH</div>
       <el-button class="pbtn mr10" type="default" @click="dialogFormVisible = true">添加新众筹项目</el-button>
@@ -154,8 +155,7 @@ export default {
           });
         })
         .on('error', (err) => {
-          console.log(err, 'err');
-          this.getBalance();
+           this.getBalance();
           this.getProjects();
           this.$notify({
             title: '捐款失败',

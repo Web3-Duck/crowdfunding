@@ -21,7 +21,6 @@ export default new Vuex.Store({
     SETNET: (state, net) => {
       state.net = net;
     },
-
   },
   actions: {
     setWebProvider({ commit }) {
@@ -37,7 +36,7 @@ export default new Vuex.Store({
               console.log(result, "网络"); //授权成功后result能正常获取到账号了
               commit("SETNET", result);
             }
-          })
+          });
           web3js.eth.getAccounts(function (error, result) {
             if (!error) {
               console.log(result, "账号"); //授权成功后result能正常获取到账号了
@@ -45,19 +44,17 @@ export default new Vuex.Store({
             }
           });
           commit("SETWEBPROVIDER", web3js);
-          web3Provider.on('networkChanged', function (networkIDstring) {
+          web3Provider.on("networkChanged", function (networkIDstring) {
             commit("SETNET", networkIDstring);
-          })
-          web3Provider.on('accountsChanged', function (accounts) {
+          });
+          web3Provider.on("accountsChanged", function (accounts) {
             commit("SETACCOUNTS", accounts[0]);
-            console.log(accounts, 111);
-          })
+          });
         } catch (error) {
           // 用户不授权时
           console.error("User denied account access");
         }
       }
-
     },
   },
   modules: {},
